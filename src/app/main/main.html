@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row content">
         <div class="col-md-6 col-md-offset-3 text-center">
-            <h1>Welcome to scriptfodder stats</h1>
+            <h1>Welcome to StatFodder</h1>
             <p>
                 This site can be used by scriptfodder developers to get an overview of their sales statistics. To get started enter your API key below. The site runs on javascript, your key is only saved locally and never transmitted to a server.
             </p>
@@ -9,13 +9,21 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">API Settings</h4>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" dw-loading="checkApiKey">
+                    <div ng-show="checkResult.status" class="col-md-12" style="margin-top: 15px">
+                        <div class="alert alert-success" role="alert" ng-show="checkResult.status == 'success'">
+                            <strong>Success</strong> The api key entered is valid.
+                        </div>
+                        <div class="alert alert-danger" role="alert" ng-show="checkResult.status == 'error'">
+                            <strong>Error</strong> The api key was not valid.
+                        </div>
+                    </div>
                     <form class="form-inline">
                         <div class="form-group">
                             <label for="apiKey">API Key</label>
-                            <input type="text" class="form-control" id="apiKey" placeholder="">
+                            <input type="text" class="form-control" id="apiKey" placeholder="" ng-model="$storage.apiKey">
                         </div>
-                        <button type="submit" class="btn btn-default">Save</button>
+                        <button type="submit" class="btn btn-default" ng-click="performCheck()">Check</button>
                     </form>
                 </div>
             </div>
