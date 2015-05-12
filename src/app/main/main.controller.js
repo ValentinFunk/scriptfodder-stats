@@ -2,5 +2,6 @@
 
 angular.module('stats')
 
-.controller('MainCtrl', function($scope, $document) {
+.controller('MainCtrl', function($scope) {
+    
 });
