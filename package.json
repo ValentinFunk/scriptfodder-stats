@@ -1,7 +1,10 @@
 {
   "name": "scriptfodder-stats",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "connect": "^3.3.5",
+    "serve-static": "^1.9.2"
+  },
   "scripts": {
     "test": "gulp test"
   },

@@ -4,12 +4,15 @@
       <a class="navbar-brand" href="https://sf-stats.kamshak.com">
         <span class="fa fa-line-chart"></span> StatFodder
       </a>
+      <div class="navbar-brand has-spinner" ng-show="loadingIndicator.isLoading()">
+  			<i class="spinner fa fa-spinner fa-1x fa-spin"></i>
+  		</div>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
       <ul class="nav navbar-nav">
         <li ui-sref-active="active"><a ui-sref="home">Home</a></li>
-        <li ui-sref-active="active" ng-show="ScriptFodder.isReady()"><a ui-sref="statistics">Statistics</a></li>
+        <li ui-sref-active="active" ui-sref="statistics" ng-show="ScriptFodder.isReady()"><a ui-sref="statistics.dashboard">Statistics</a></li>
         <li ui-sref-active="active"><a ui-sref="about">About</a></li>
       </ul>
 

@@ -1,5 +1,5 @@
 angular.module('stats')
-    .controller('RevenueCtrl', function($scope, $loading, ScriptFodder, $q) {
+    .controller('RevenueCtrl', function($scope, $loading, ScriptFodder, $q, scripts) {
         $loading.start('data');
 
         $scope.dateRange = {};
@@ -67,36 +67,18 @@ angular.module('stats')
             };
         }
 
+        console.log(scripts);
         $scope.checkModel = {
             0: true
         };
-        ScriptFodder.Scripts.query().$promise
-        .then(function(scripts) {
-            $scope.scripts = scripts;
-
-            return $q.each(scripts, function(script) {
-                return script.$info()
-                    .then(function(script) {
-                        return ScriptFodder.Scripts.purchases({
-                            scriptId: script.id
-                        }).$promise
-                    })
-                    .then(function(purchases) {
-                        script.purchases = purchases;
-                    });
-            });
-        })
-        .then(function() {
-            var earliest = _.chain($scope.scripts).pluck('addedDate').min().value();
-            $scope.dateRange = {
-                startDate: new Date(earliest * 1000),
-                endDate: Date.now()
-            };
-            $scope.maxDate = Date.now();
-        })
-        .catch(function(err) {
-            console.log(err);
-        });
+        $scope.scripts = scripts;
+        var earliest = _.chain($scope.scripts).pluck('addedDate').min().value();
+        $scope.dateRange = {
+            startDate: new Date(earliest * 1000),
+            endDate: Date.now()
+        };
+        $scope.maxDate = Date.now();
+        
 
         $scope.$watch(function() {
             return [$scope.checkModel, $scope.dateRange];
