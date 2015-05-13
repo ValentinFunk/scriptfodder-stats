@@ -1,5 +1,5 @@
 <nav class="navbar navbar-static-top navbar-default" ng-controller="NavbarCtrl">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="https://sf-stats.kamshak.com">
         <span class="fa fa-line-chart"></span> StatFodder
@@ -9,6 +9,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
       <ul class="nav navbar-nav">
         <li ui-sref-active="active"><a ui-sref="home">Home</a></li>
+        <li ui-sref-active="active" ng-show="ScriptFodder.isReady()"><a ui-sref="statistics">Statistics</a></li>
         <li ui-sref-active="active"><a ui-sref="about">About</a></li>
       </ul>
 

@@ -8,12 +8,22 @@ angular.module('stats')
     $scope.performCheck = function() {
         $loading.start('checkApiKey');
         $scope.checkResult = {};
-        ScriptFodder.Scripts.query().$promise
+        ScriptFodder.initialize()
         .then(function() {
             $loading.finish('checkApiKey');
             $scope.checkResult = {
               status: 'success'  
             };
+            
+            ScriptFodder.Scripts.query().$promise.then(function(scripts){
+               console.log(scripts);
+               for (var i = 0; i < scripts.length; i++) {
+                   scripts[i].$info().then(function(script){
+                      console.log(script);
+                      console.log(scripts[i]);
+                   });
+               }
+            });
         }, function(err) {
             $loading.finish('checkApiKey');
             $scope.checkResult = {
@@ -22,4 +32,8 @@ angular.module('stats')
             };
         });
     };
+    
+    if ($scope.$storage.apiKey) {
+        ScriptFodder.initialize();
+    }
 });

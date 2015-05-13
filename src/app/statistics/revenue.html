@@ -1,0 +1,11 @@
+<h1>Daily Statistics</h1>
+<h2>Scripts</h2>
+<div class="btn-group">
+    <label ng-repeat="script in scripts" class="btn btn-primary" ng-model="checkModel[$index]" btn-checkbox>{{script.name}}</label>
+</div>
+<h2>Timespan</h2>
+<input date-range-picker class="form-control date-picker" type="text" min="minDate" max="maxDate" ng-model="dateRange" />
+<div id="revenue"></div>
+<div id="number"></div>
+<div class="legend"></div>
+
