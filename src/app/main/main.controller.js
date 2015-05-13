@@ -34,6 +34,6 @@ angular.module('stats')
     };
     
     if ($scope.$storage.apiKey) {
-        ScriptFodder.initialize();
+        $scope.performCheck();
     }
 });
