@@ -27,7 +27,10 @@ angular.module('stats')
     
     for (var i = 0; i < scripts.length; i++) {
         $scope.performance.lastMonth.scripts[i] = aggregateScriptSales(moment().subtract(1, 'M').startOf('month'), moment().subtract(1, 'M').endOf('month'), scripts[i]);
+        $scope.performance.lastMonth.scripts[i].script = $scope.scripts[i];
+        
         $scope.performance.thisMonth.scripts[i] = aggregateScriptSales(moment().startOf('month'), moment(), scripts[i]);
+        $scope.performance.thisMonth.scripts[i].script = $scope.scripts[i];
     }
     
     function reduceParam(scriptsData, param) {
@@ -47,5 +50,39 @@ angular.module('stats')
     $scope.performance.lastMonth.total = calculateTotals($scope.performance.lastMonth);
     $scope.performance.thisMonth.total = calculateTotals($scope.performance.thisMonth);
     
+    var data = _.chain($scope.performance.thisMonth.scripts)
+    .map(function(value, key, object){
+        console.log(value);
+        return {
+          key: $scope.scripts[key].name,
+          y: value.revenue
+        };
+    })
+    .remove(function(value){
+        return value.y;
+    })
+    .value();
+    console.log($scope.performance.thisMonth.scripts);
+    $scope.salesGraphData = $scope.performance.thisMonth.scripts;
     
+    $scope.salesGraphOptions = {
+        chart: {
+            type: 'pieChart',
+            height: 300,
+            margin : {
+                top: 10,
+                right: 10,
+                bottom: 10,
+                left: 10
+            },
+            showLegend: false,
+            x: function(d){ return d.script.name; },
+            y: function(d){ return d.revenue || 0; },
+            showValues: false,
+            valueFormat: function(d){
+                return d3.format('$,.2f')(d);
+            },
+            duration: 4000,
+        }
+    };
 });

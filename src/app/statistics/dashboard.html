@@ -1,11 +1,7 @@
 <h1>Dashboard</h1>
+
 <div class="row">
-    <div class="col-md-12">
-        <div id="revenue"></div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-3">
+    <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
                 This Month
@@ -13,10 +9,15 @@
             <div class="panel-body">
                 <p><strong>Scripts Sold</strong>: {{performance.thisMonth.total.amountSold}}</p>
                 <p><strong>Revenue</strong>: {{performance.thisMonth.total.revenue | currency:"$":2}}</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <nvd3 options='salesGraphOptions' data='performance.thisMonth.scripts'></nvd3>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
                 Last Month
@@ -24,6 +25,11 @@
             <div class="panel-body">
                 <p><strong>Scripts Sold</strong>: {{performance.lastMonth.total.amountSold}}</p>
                 <p><strong>Revenue</strong>: {{performance.lastMonth.total.revenue | currency:"$":2}}</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <nvd3 options='salesGraphOptions' data='performance.lastMonth.scripts'></nvd3>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
