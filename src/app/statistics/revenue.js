@@ -67,18 +67,17 @@ angular.module('stats')
             };
         }
 
-        console.log(scripts);
         $scope.checkModel = {
             0: true
         };
         $scope.scripts = scripts;
+   
         var earliest = _.chain($scope.scripts).pluck('addedDate').min().value();
         $scope.dateRange = {
             startDate: new Date(earliest * 1000),
             endDate: Date.now()
         };
         $scope.maxDate = Date.now();
-        
 
         $scope.$watch(function() {
             return [$scope.checkModel, $scope.dateRange];
