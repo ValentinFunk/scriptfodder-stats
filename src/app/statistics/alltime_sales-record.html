@@ -1,0 +1,11 @@
+<!-- Directive sales-record -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>Best {{intervalName}}</h4>
+        <h6>{{ interval.time | amDateFormat:dateFormat }}</h6>
+    </div>
+    <div class="panel-body">
+        <p><strong>Revenue</strong>: {{ interval.revenue | currency:"$":2 }}</p>
+        <p><strong>Scripts Sold</strong>: {{ interval.scriptsSold }}</p>
+    </div>
+</div>

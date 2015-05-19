@@ -1,0 +1,31 @@
+<h1>All-time Script Statistics</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Total Revenue
+            </div>
+            <div class="panel-body">
+                <p><strong>Scripts Sold</strong>: {{performance.overall.total.amountSold}}</p>
+                <p><strong>Revenue</strong>: {{performance.overall.total.revenue | currency:"$":2}}</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <nvd3 options='salesGraphOptions' data='performance.scripts'></nvd3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <sales-record interval="performance.records.day" interval-name="Day" date-format="dddd, MMMM Do YYYY"></sales-record>
+    </div>
+    <div class="col-md-4">
+        <sales-record interval="performance.records.week" interval-name="Week" date-format="[Week] W of YYYY (MMMM Do YYYY [+ 7 Days])"></sales-record>
+    </div>
+    <div class="col-md-4">
+        <sales-record interval="performance.records.month" interval-name="Month" date-format="MMMM YYYY"></sales-record>
+    </div>
+</div>

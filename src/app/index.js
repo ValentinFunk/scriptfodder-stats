@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('stats', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ngStorage', 'darthwade.loading', 'mwl.bluebird', 'daterangepicker', 'nvd3'])
+var app = angular.module('stats', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngResource', 'ngSanitize', 'ui.router', 'ui.bootstrap', 'ngStorage', 'darthwade.loading', 'mwl.bluebird', 'daterangepicker', 'nvd3', 'angularMoment'])
 
 .config(function($httpProvider) {
     $httpProvider.interceptors.push(function(LoadingIndicator, $q) {
@@ -69,6 +69,12 @@ var app = angular.module('stats', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngResou
         url: '/revenue',
         templateUrl: 'app/statistics/revenue.html',
         controller: 'RevenueCtrl'
+    })
+    
+    .state('statistics.alltime', {
+        url: '/alltime',
+        templateUrl: 'app/statistics/alltime.html',
+        controller: 'AlltimeCtrl'
     })
 
     .state('about', {
