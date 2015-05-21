@@ -2,8 +2,9 @@
 
 angular.module('stats')
 
-.controller('MainCtrl', function($scope, $localStorage, $loading, ScriptFodder) {
+.controller('MainCtrl', function($scope, $localStorage, $loading, ScriptFodder, $rootScope) {
     $scope.$storage = $localStorage;
+    $scope.$storage.globalCurrency = $scope.$storage.globalCurrency || 'USD';
 
     $scope.performCheck = function() {
         $loading.start('checkApiKey');

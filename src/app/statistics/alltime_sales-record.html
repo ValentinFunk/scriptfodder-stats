@@ -5,7 +5,7 @@
         <h6>{{ interval.time | amDateFormat:dateFormat }}</h6>
     </div>
     <div class="panel-body">
-        <p><strong>Revenue</strong>: {{ interval.revenue | currency:"$":2 }}</p>
+        <p><strong>Revenue</strong>: <alternative-currency to-currency="globalCurrency" date="interval.time" base-currency="'USD'" amount='interval.revenue'></alternative-currency></p>
         <p><strong>Scripts Sold</strong>: {{ interval.scriptsSold }}</p>
     </div>
 </div>

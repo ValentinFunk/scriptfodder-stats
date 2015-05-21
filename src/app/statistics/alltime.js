@@ -107,7 +107,8 @@ angular.module('stats')
         scope: {
             interval: "=",
             intervalName: '@',
-            dateFormat: '@'
+            dateFormat: '@',
+            globalCurrency: '='
         }
     };
 });

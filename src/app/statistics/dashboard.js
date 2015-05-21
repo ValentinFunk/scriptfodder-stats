@@ -28,6 +28,7 @@ angular.module('stats')
     for (var i = 0; i < scripts.length; i++) {
         $scope.performance.lastMonth.scripts[i] = aggregateScriptSales(moment().subtract(1, 'M').startOf('month'), moment().subtract(1, 'M').endOf('month'), scripts[i]);
         $scope.performance.lastMonth.scripts[i].script = $scope.scripts[i];
+        $scope.performance.lastMonth.date = moment().subtract(1, 'M').startOf('month');
         
         $scope.performance.thisMonth.scripts[i] = aggregateScriptSales(moment().startOf('month'), moment(), scripts[i]);
         $scope.performance.thisMonth.scripts[i].script = $scope.scripts[i];
