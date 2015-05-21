@@ -83,4 +83,8 @@ var app = angular.module('stats', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngResou
     });
 
     $urlRouterProvider.otherwise('/');
+})
+
+.run(function($localStorage){
+    $localStorage.globalCurrency = $localStorage.globalCurrency || 'USD';
 });
