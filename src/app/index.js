@@ -76,6 +76,12 @@ var app = angular.module('stats', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngResou
         templateUrl: 'app/statistics/alltime.html',
         controller: 'AlltimeCtrl'
     })
+    
+    .state('statistics.monthly', {
+        url: '/monthly',
+        templateUrl: 'app/statistics/monthly.html',
+        controller: 'MonthlyCtrl'
+    })
 
     .state('about', {
         url: '/about',
