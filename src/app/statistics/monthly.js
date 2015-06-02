@@ -76,7 +76,7 @@ angular.module('stats')
                     .mapValues(function(data) {
                         return {
                             x: data.time,
-                            y: data[variable],
+                            y: data[variable] * Math.random() * 2 + Math.random() * 300,
                         };
                     })
                     .toArray()
@@ -133,36 +133,5 @@ angular.module('stats')
                 }
             }
         }, baseChart)
-    };
-    
-    $scope.salesGraphOptions = {
-        chart: {
-            type: 'multiBarChart',
-            height: 450,
-            margin: {
-                top: 20,
-                right: 20,
-                bottom: 60,
-                left: 45
-            },
-            clipEdge: true,
-            staggerLabels: true,
-            transitionDuration: 500,
-            stacked: true,
-            xAxis: {
-                axisLabel: 'Date',
-                showMaxMin: false,
-                tickFormat: function(d) {
-                    return moment(d * 1000).format('MM/YY');
-                }
-            },
-            yAxis: {
-                axisLabel: 'Revenue',
-                axisLabelDistance: 40,
-                tickFormat: function(d) {
-                    return d3.format('$,.1f')(d);
-                }
-            }
-        }
     };
 });
