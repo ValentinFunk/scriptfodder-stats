@@ -50,20 +50,7 @@ angular.module('stats')
     
     $scope.performance.lastMonth.total = calculateTotals($scope.performance.lastMonth);
     $scope.performance.thisMonth.total = calculateTotals($scope.performance.thisMonth);
-    
-    var data = _.chain($scope.performance.thisMonth.scripts)
-    .map(function(value, key, object){
-        console.log(value);
-        return {
-          key: $scope.scripts[key].name,
-          y: value.revenue
-        };
-    })
-    .remove(function(value){
-        return value.y;
-    })
-    .value();
-    console.log($scope.performance.thisMonth.scripts);
+
     $scope.salesGraphData = $scope.performance.thisMonth.scripts;
     
     $scope.salesGraphOptions = {

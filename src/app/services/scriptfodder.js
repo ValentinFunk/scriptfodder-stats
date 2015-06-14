@@ -63,6 +63,65 @@ angular.module('stats')
         });
     };
     
+    
+    ScriptFodder.getOftenPurchasedWith = function(scriptId) {
+        var self = this;
+        return $q.resolve()
+        .then(function(){
+            if (!self.frequentSets) {
+                self.frequentSets = $http.get('/assets/frequentSets.json')
+                .then(function(sets){
+                    return sets.data;
+                });
+            }
+            
+            return self.frequentSets;
+        })
+        .then(function(frequentSets) {
+            var entry = _.find(frequentSets, function(frequentSet) {
+                return frequentSet.KeyItem == scriptId; 
+            });
+            
+            if (entry) {
+                return _.filter(entry.ItemSet, function(id) { return id != scriptId });
+            }
+            return null;
+        });
+    };
+
+    ScriptFodder.getLocalScriptInfo = function(scriptId) {
+        var self = this;
+        
+        var data = {};
+        data.$promise = $q.resolve()
+        .then(function(){
+            if (!self.scriptInfo) {
+                self.scriptInfo = $http.get('/assets/scripts.json')
+                .then(function(scripts){
+                    return scripts.data;
+                });
+            }
+            
+            return self.scriptInfo;
+        })
+        .then(function(scripts) {
+            return _.find(scripts, function(script) {
+                return script.id == scriptId;
+            });
+        })
+        .then(function(script) {
+            if (script) {
+                _.extend(data, script);
+            } else {
+                return $q.reject("Script " + scriptId + " could not be found in the local db");
+            }
+           
+            return data;
+        });
+        
+        return data;
+    };
+    
     ScriptFodder.isReady = function() {
         return this.ready;  
     };

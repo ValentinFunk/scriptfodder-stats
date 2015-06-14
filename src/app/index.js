@@ -44,17 +44,20 @@ var app = angular.module('stats', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngResou
         resolve: {
             scripts: function(ScriptFodder) {
                 return ScriptFodder.initialize().then(function() {
-                        return ScriptFodder.Scripts.query().$promise;
-                    })
-                    .each(function(script) {
-                        return script.$info().then(function(script) {
-                            return ScriptFodder.Scripts.purchases({
-                                scriptId: script.id
-                            }).$promise
-                        }).then(function(purchases) {
-                            script.purchases = purchases;
-                        });
-                    });
+                    return ScriptFodder.Scripts.query().$promise;
+                })
+                .map(function(script) {
+                    return script.$info();
+                })
+                .map(function(script) {
+                    return ScriptFodder.Scripts.purchases({
+                        scriptId: script.id
+                    }).$promise.then(function(purchases) {
+                        script.purchases = purchases;
+                        return script;
+                    }).catch(console.log.bind(console));
+                })
+                .catch(console.log.bind(console));
             }
         }
     })
@@ -63,6 +66,12 @@ var app = angular.module('stats', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngResou
         url: '',
         templateUrl: 'app/statistics/dashboard.html',
         controller: 'DashboardCtrl'
+    })
+    
+    .state('statistics.related', {
+        url: '/related',
+        templateUrl: 'app/statistics/purchaseinfo.html',
+        controller: 'PurchaseInfoCtrl'
     })
 
     .state('statistics.revenue', {

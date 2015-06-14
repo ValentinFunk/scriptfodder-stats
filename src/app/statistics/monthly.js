@@ -12,18 +12,20 @@ angular.module('stats')
 
     var earliest = _.chain(scripts)
         .map(function(script) {
-            return _(script.purchases).filter(function(x){return x.price != 0; }).pluck('purchase_time').min();
+            return _(script.purchases).filter(function(x) {
+                return x.price != 0;
+            }).pluck('purchase_time').min();
         })
         .min()
         .value();
-        
-     var latest = _.chain(scripts)
+
+    var latest = _.chain(scripts)
         .map(function(script) {
             return _(script.purchases).pluck('purchase_time').max();
         })
         .max()
         .value();
-        
+
     earliest = moment(earliest * 1000).startOf('month');
     latest = moment(latest * 1000).startOf('month');
 
@@ -31,14 +33,14 @@ angular.module('stats')
         var intervalStats = _(scripts)
             .mapValues(function(script) {
                 var scriptData = _(script.purchases)
-                    .filter(function(purchase){
+                    .filter(function(purchase) {
                         return purchase.price > 0;
                     })
                     .groupBy(function(purchase) {
                         return moment(purchase.purchase_time * 1000).startOf(interval).unix();
                     })
-                    .tap(function(array){
-                        for(var current = moment(earliest); !current.isAfter(latest); current.add(1, 'M')) {
+                    .tap(function(array) {
+                        for (var current = moment(earliest); !current.isAfter(latest); current.add(1, 'M')) {
                             array[current.unix()] = array[current.unix()] || [];
                         }
                     })
@@ -65,25 +67,25 @@ angular.module('stats')
 
     var monthlyData = getIntervalStats('month');
     console.log("Got Monthly", monthlyData);
-    
+
     function getData(variable) {
         return _(scripts)
-        .map(function(script, key, object) {
-            return {
-                id: key,
-                key: script.name,
-                values: _(monthlyData[key])
+            .map(function(script, key, object) {
+                return {
+                    id: key,
+                    key: script.name,
+                    values: _(monthlyData[key])
                     .mapValues(function(data) {
                         return {
                             x: data.time,
-                            y: data[variable] * Math.random() * 2 + Math.random() * 300,
+                            y: data[variable],
                         };
                     })
                     .toArray()
                     .value(),
-            };
-        })
-        .value();
+                };
+            })
+            .value();
     }
 
     $scope.revenue = getData('revenue');
@@ -122,7 +124,7 @@ angular.module('stats')
             }
         }, baseChart)
     };
-    
+
     $scope.numPurchasesChart = {
         chart: _.extend({
             yAxis: {
