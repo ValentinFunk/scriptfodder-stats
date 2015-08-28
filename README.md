@@ -18,13 +18,13 @@ Then go into the project's directory and install all dependencies:
     cd scriptfodder-stats
     npm install && bower install
 
-To start a development server run gulp:
+To start a development server:
 
-    gulp
+    gulp serve
 
 ## Building the Project
-To build the project execute a gulp build:
+To build the project execute gulp without arguments:
 
-    gulp build
+    gulp
 
 The files in the dist folder can then be uploaded to any static hosting.
