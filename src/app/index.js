@@ -42,7 +42,7 @@ var app = angular.module('stats', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngResou
         controller: 'StatisticsCtrl',
         abstract: true,
         resolve: {
-            scripts: function(ScriptFodder) {
+            scripts: function(ScriptFodder, $state) {
                 return ScriptFodder.initialize().then(function() {
                     return ScriptFodder.Scripts.query().$promise;
                 })
@@ -57,7 +57,9 @@ var app = angular.module('stats', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngResou
                         return script;
                     }).catch(console.log.bind(console));
                 })
-                .catch(console.log.bind(console));
+                .catch(function(){
+                    $state.go('home');
+                });
             }
         }
     })
