@@ -10,17 +10,21 @@ To install the project first clone it:
 git clone https://github.com/Kamshak/scriptfodder-stats.git
 
 Make sure you have NodeJS installed. (https://nodejs.org/download/). Next install bower:
-npm install -g bower
+
+    npm install -g bower
 
 Then go into the project's directory and install all dependencies:
-cd scriptfodder-stats
-npm install && bower install
+
+    cd scriptfodder-stats
+    npm install && bower install
 
 To start a development server run gulp:
-gulp
+
+    gulp
 
 ## Building the Project
 To build the project execute a gulp build:
-gulp build
+
+    gulp build
 
 The files in the dist folder can then be uploaded to any static hosting.
