@@ -5,7 +5,7 @@
 Scriptfodder Sales statistics using the SF API. 100% clientside, no API key collecting.
 Can be accessed here: [https://kamshak.github.io/scriptfodder-stats/](https://kamshak.github.io/scriptfodder-stats/)
 
-## Installation
+## Installation / Development
 To install the project first clone it:
 git clone https://github.com/Kamshak/scriptfodder-stats.git
 
@@ -23,8 +23,9 @@ To start a development server:
     gulp serve
 
 ## Building the Project
-To build the project execute gulp without arguments:
 
-    gulp
+To build the project execute gulp build:
+
+    gulp build
 
 The files in the dist folder can then be uploaded to any static hosting.
