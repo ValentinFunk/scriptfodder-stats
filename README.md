@@ -3,7 +3,7 @@
 [![wercker status](https://app.wercker.com/status/e4906f0a294addb9c15ef7fa008e16fe/s/master "wercker status")](https://app.wercker.com/project/bykey/e4906f0a294addb9c15ef7fa008e16fe)
 
 Scriptfodder Sales statistics using the SF API. 100% clientside, no API key collecting.
-Can be accessed here: [http://sfstats.kamshak.com/](http://sfstats.kamshak.com/)
+Can be accessed here: [https://kamshak.github.io/scriptfodder-stats/](https://kamshak.github.io/scriptfodder-stats/)
 
 ## Installation
 To install the project first clone it:
