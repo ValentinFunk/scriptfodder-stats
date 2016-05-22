@@ -1,0 +1,14 @@
+box: evolution7/nodejs-bower-gulp
+build:
+  steps:
+    - wercker/npm-install@1.1.4
+    - greatbeyond/bower-install@0.5.8
+    - script:
+       name: Build App
+       code: gulp build
+deploy:
+  steps:
+    - git-push:
+         gh_oauth: $GH_TOKEN
+         gh_pages: true
+         basedir: dist
