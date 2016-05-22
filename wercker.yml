@@ -5,8 +5,6 @@ build:
     - script:
        name: Bower Install
        code: |
-        apt-get update
-        apt-get install ssh -y
         git config --global url."https://".insteadOf git://
         bower install --force-latest --allow-root
     - script:
