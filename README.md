@@ -1,6 +1,6 @@
 # scriptfodder-stats
 
-![build status](http://ci.kamshak.com/projects/6/status.png?ref=master)
+[![wercker status](https://app.wercker.com/status/e4906f0a294addb9c15ef7fa008e16fe/s/master "wercker status")](https://app.wercker.com/project/bykey/e4906f0a294addb9c15ef7fa008e16fe)
 
 Scriptfodder Sales statistics using the SF API. 100% clientside, no API key collecting.
 Can be accessed here: [http://sfstats.kamshak.com/](http://sfstats.kamshak.com/)
