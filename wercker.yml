@@ -2,7 +2,6 @@ box: evolution7/nodejs-bower-gulp
 build:
   steps:
     - wercker/npm-install@1.1.4
-    - greatbeyond/bower-install@0.5.8
     - script:
        name: Bower Install
        code: |
