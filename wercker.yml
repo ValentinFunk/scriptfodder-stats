@@ -12,7 +12,7 @@ build:
        code: gulp build
 deploy:
   steps:
-    - git-push:
+    - leipert/git-push:
          gh_oauth: $GH_TOKEN
          gh_pages: true
          basedir: dist
