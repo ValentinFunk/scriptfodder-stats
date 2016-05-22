@@ -1,9 +1,10 @@
-# scriptfodder-stats
+# Scriptfodder Sales Statistics & Graphs
 
 [![wercker status](https://app.wercker.com/status/e4906f0a294addb9c15ef7fa008e16fe/s/master "wercker status")](https://app.wercker.com/project/bykey/e4906f0a294addb9c15ef7fa008e16fe)
 
-Scriptfodder Sales statistics using the SF API. 100% clientside, no API key collecting.
-Can be accessed here: [https://kamshak.github.io/scriptfodder-stats/](https://kamshak.github.io/scriptfodder-stats/)
+Scriptfodder Sales Statistics using the SF API. 100% clientside, no API key collecting. Made with Angular.JS and D3.
+
+**Can be accessed here: [https://kamshak.github.io/scriptfodder-stats/](https://kamshak.github.io/scriptfodder-stats/)**
 
 ## Installation / Development
 To install the project first clone it:
