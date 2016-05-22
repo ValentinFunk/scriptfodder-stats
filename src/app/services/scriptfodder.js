@@ -15,7 +15,7 @@ angular.module('stats')
 
 .factory('ScriptFodder', function($resource, $localStorage, $http, $q) {
     var ScriptFodder = {};
-    
+
      var initApi = function() {
         ScriptFodder.Scripts = $resource('https://scriptfodder.com/api/scripts/info/:scriptId?api_key=' + $localStorage.apiKey, {scriptId: '@id'}, {
             query: {
@@ -23,7 +23,7 @@ angular.module('stats')
                 url: 'https://scriptfodder.com/api/scripts?api_key=' + $localStorage.apiKey,
                 isArray: true,
                 transformResponse: appendTransform($http.defaults.transformResponse, function(response) {
-                    return response.scripts;
+                  return response.scripts;
                 })
             },
             info: {
@@ -33,7 +33,7 @@ angular.module('stats')
                 })
             },
             purchases: {
-                method: 'GET', 
+                method: 'GET',
                 url: 'https://scriptfodder.com/api/scripts/purchases/:scriptId?api_key=' + $localStorage.apiKey,
                 isArray: true,
                 transformResponse: appendTransform($http.defaults.transformResponse, function(response) {
@@ -49,21 +49,21 @@ angular.module('stats')
             }
         });
     };
-    
+
     ScriptFodder.ready = false;
     ScriptFodder.initialize = function() {
         if (this.ready) {
             $q.resolve();
         }
-        
+
         this.initializing = true;
         initApi();
         return this.Scripts.query().$promise.then(function(){
-           ScriptFodder.ready = true; 
+           ScriptFodder.ready = true;
         });
     };
-    
-    
+
+
     ScriptFodder.getOftenPurchasedWith = function(scriptId) {
         var self = this;
         return $q.resolve()
@@ -74,14 +74,14 @@ angular.module('stats')
                     return sets.data;
                 });
             }
-            
+
             return self.frequentSets;
         })
         .then(function(frequentSets) {
             var entry = _.find(frequentSets, function(frequentSet) {
-                return frequentSet.KeyItem == scriptId; 
+                return frequentSet.KeyItem == scriptId;
             });
-            
+
             if (entry) {
                 return _.filter(entry.ItemSet, function(id) { return id != scriptId });
             }
@@ -91,7 +91,7 @@ angular.module('stats')
 
     ScriptFodder.getLocalScriptInfo = function(scriptId) {
         var self = this;
-        
+
         var data = {};
         data.$promise = $q.resolve()
         .then(function(){
@@ -101,7 +101,7 @@ angular.module('stats')
                     return scripts.data;
                 });
             }
-            
+
             return self.scriptInfo;
         })
         .then(function(scripts) {
@@ -115,17 +115,17 @@ angular.module('stats')
             } else {
                 return $q.reject("Script " + scriptId + " could not be found in the local db");
             }
-           
+
             return data;
         });
-        
+
         return data;
     };
-    
+
     ScriptFodder.isReady = function() {
-        return this.ready;  
+        return this.ready;
     };
-    
-   
+
+
     return ScriptFodder;
 });

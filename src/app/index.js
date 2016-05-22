@@ -9,12 +9,12 @@ var app = angular.module('stats', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngResou
                 LoadingIndicator.startedLoading();
                 return config;
             },
-            
+
             'requestError': function(rejection) {
                 LoadingIndicator.finishedLoading();
                 return $q.reject(rejection);
             },
-            
+
             'responseError': function(rejection) {
                 LoadingIndicator.finishedLoading();
                 return $q.reject(rejection);
@@ -42,20 +42,19 @@ var app = angular.module('stats', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngResou
         controller: 'StatisticsCtrl',
         abstract: true,
         resolve: {
-            scripts: function(ScriptFodder, $state) {
+            scripts: function(ScriptFodder, $state, $q) {
+                console.log("Loading Scripts from promise");
                 return ScriptFodder.initialize().then(function() {
                     return ScriptFodder.Scripts.query().$promise;
                 })
                 .map(function(script) {
-                    return script.$info();
-                })
-                .map(function(script) {
-                    return ScriptFodder.Scripts.purchases({
-                        scriptId: script.id
-                    }).$promise.then(function(purchases) {
-                        script.purchases = purchases;
-                        return script;
-                    }).catch(console.log.bind(console));
+                  var purchasePromise = ScriptFodder.Scripts.purchases({
+                      scriptId: script.id
+                  });
+                  return $q.all([script.$info(), purchasePromise]).spread(function(info, purchases) {
+                    info.purchases = purchases;
+                    return info;
+                  });
                 })
                 .catch(function(){
                     $state.go('home');
@@ -69,7 +68,7 @@ var app = angular.module('stats', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngResou
         templateUrl: 'app/statistics/dashboard.html',
         controller: 'DashboardCtrl'
     })
-    
+
     .state('statistics.related', {
         url: '/related',
         templateUrl: 'app/statistics/purchaseinfo.html',
@@ -81,13 +80,13 @@ var app = angular.module('stats', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngResou
         templateUrl: 'app/statistics/revenue.html',
         controller: 'RevenueCtrl'
     })
-    
+
     .state('statistics.alltime', {
         url: '/alltime',
         templateUrl: 'app/statistics/alltime.html',
         controller: 'AlltimeCtrl'
     })
-    
+
     .state('statistics.monthly', {
         url: '/monthly',
         templateUrl: 'app/statistics/monthly.html',
