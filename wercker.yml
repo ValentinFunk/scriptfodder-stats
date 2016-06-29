@@ -5,6 +5,7 @@ build:
     - script:
        name: Bower Install
        code: |
+        npm install -g bower gulp@latest
         git config --global url."https://".insteadOf git://
         bower install --force-latest --allow-root
     - script:
