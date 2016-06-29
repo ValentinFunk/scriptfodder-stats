@@ -1,7 +1,7 @@
-box: evolution7/nodejs-bower-gulp
+box: kamshak/docker-nodejs-bower-gulp
 build:
   steps:
-    - wercker/npm-install@1.1.4
+    - wercker/npm-install
     - script:
        name: Bower Install
        code: |
