@@ -1,11 +1,12 @@
-# scriptfodder-stats
+# Scriptfodder Sales Statistics & Graphs
 
-![build status](http://ci.kamshak.com/projects/6/status.png?ref=master)
+[![wercker status](https://app.wercker.com/status/e4906f0a294addb9c15ef7fa008e16fe/s/master "wercker status")](https://app.wercker.com/project/bykey/e4906f0a294addb9c15ef7fa008e16fe)
 
-Scriptfodder Sales statistics using the SF API. 100% clientside, no API key collecting.
-Can be accessed here: [http://sfstats.kamshak.com/](http://sfstats.kamshak.com/)
+Scriptfodder Sales Statistics using the SF API. 100% clientside, no API key collecting. Made with Angular.JS and D3.
 
-## Installation
+**Can be accessed here: [https://kamshak.github.io/scriptfodder-stats/](https://kamshak.github.io/scriptfodder-stats/)**
+
+## Installation / Development
 To install the project first clone it:
 git clone https://github.com/Kamshak/scriptfodder-stats.git
 
@@ -23,8 +24,9 @@ To start a development server:
     gulp serve
 
 ## Building the Project
-To build the project execute gulp without arguments:
 
-    gulp
+To build the project execute gulp build:
+
+    gulp build
 
 The files in the dist folder can then be uploaded to any static hosting.
