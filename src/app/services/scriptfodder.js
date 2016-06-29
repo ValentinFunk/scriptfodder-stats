@@ -63,6 +63,33 @@ angular.module('stats')
         });
     };
 
+    ScriptFodder.loaded = false;
+    // Delays are due to SF API Rate Limits
+    ScriptFodder.loadScripts = function(gotScriptsCallback, statusCallback) {
+      return ScriptFodder.initialize().then(function() {
+        return ScriptFodder.Scripts.query().$promise;
+      }).tap(function(scripts) {
+        gotScriptsCallback(scripts);
+      }).map(function(script) {
+        statusCallback(script);
+        var purchasePromise = $q.delay(100).then(function() {
+          return ScriptFodder.Scripts.purchases({
+            scriptId: script.id
+          });
+        });
+        return $q.all([script.$info(), purchasePromise]).spread(function(info, purchases) {
+          info.purchases = purchases;
+          return info;
+        }).delay(100);
+      }, {concurrency: 1}).tap(function(scriptInfo) {
+        ScriptFodder.scriptInfo = scriptInfo;
+        ScriptFodder.loaded = true;
+      });
+    }
+
+    ScriptFodder.getScriptInfo = function() {
+      return this.scriptInfo;
+    }
 
     ScriptFodder.getOftenPurchasedWith = function(scriptId) {
         var self = this;
