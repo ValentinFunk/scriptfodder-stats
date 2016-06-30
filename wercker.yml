@@ -7,7 +7,7 @@ build:
        code: |
         npm install -g bower gulp@latest
         git config --global url."https://".insteadOf git://
-        bower install --force-latest --allow-root
+        bower install --allow-root
     - script:
        name: Build App
        code: gulp build
