@@ -136,7 +136,9 @@ var app = angular.module('stats', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngResou
 
     $urlRouterProvider.otherwise('/');
 })
-
+.run(function($q){
+  $q.longStackTraces();
+})
 .run(function($localStorage){
     $localStorage.globalCurrency = $localStorage.globalCurrency || 'USD';
 });
