@@ -17,3 +17,4 @@ deploy:
          gh_oauth: $GH_TOKEN
          gh_pages: true
          basedir: dist
+         clean_removed_files: true
