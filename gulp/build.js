@@ -32,33 +32,29 @@ module.exports = function(options) {
       addRootSlash: false
     };
 
-    var htmlFilter = $.filter('*.html', {restore: true});
-    var jsFilter = $.filter('**/*.js', {restore: true});
-    var cssFilter = $.filter('**/*.css', {restore: true});
-    var assets;
+    var htmlFilter = $.filter('*.html', { restore: true });
+    var jsFilter = $.filter('*.js', { restore: true });
+    var cssFilter = $.filter('**', { restore: true });
+    var indexHtmlFilter = $.filter(['**/*', '!**/index.html'], { restore: true });
 
     return gulp.src(options.tmp + '/serve/*.html')
       .pipe($.inject(partialsInjectFile, partialsInjectOptions))
-      .pipe(assets = $.useref())
-      .pipe($.rev())
-      .pipe(jsFilter)
-      .pipe($.ngAnnotate())
-      .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', options.errorHandler('Uglify'))
-      .pipe(jsFilter.restore)
-      .pipe(cssFilter)
-      .pipe($.replace('../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/', '../fonts/'))
-      .pipe($.csso())
-      .pipe(cssFilter.restore)
       .pipe($.useref())
-      .pipe($.revReplace())
-      .pipe(htmlFilter)
-      .pipe($.minifyHtml({
+      .pipe($.if('*.js', $.ngAnnotate()))
+      .pipe($.if('*.js', $.uglify({ preserveComments: $.uglifySaveLicense })).on('error', options.errorHandler('Uglify')))
+      .pipe($.if('*.css',$.replace('../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/', '../fonts/')))
+      .pipe($.if('*.css', $.csso()))
+      .pipe($.if('*.html', $.minifyHtml({
         empty: true,
         spare: true,
         quotes: true,
+        removeComments: true,
+        collapseWhitespace: true,
+        conservativeCollapse: true,
         conditionals: true
-      }))
-      .pipe(htmlFilter.restore)
+      })))
+      .pipe($.if(['**/*.js', '**/*.css'], $.rev()))
+      .pipe($.revReplace())
       .pipe(gulp.dest(options.dist + '/'))
       .pipe($.size({ title: options.dist + '/', showFiles: true }));
   });
