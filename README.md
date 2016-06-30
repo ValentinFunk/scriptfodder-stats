@@ -1,4 +1,4 @@
-## [![StatFodder](http://res.cloudinary.com/dctipxdo4/image/upload/c_scale,h_64/v1467305275/Bild1_qz4pyc.png) StatFodder](https://kamshak.github.io/scriptfodder-stats/) - Sales Statistics for ScriptFodder
+## [![StatFodder](http://res.cloudinary.com/dctipxdo4/image/upload/c_scale,h_32/v1467305275/Bild1_qz4pyc.png) StatFodder](https://kamshak.github.io/scriptfodder-stats/) - Sales Statistics for ScriptFodder
 
 [![wercker status](https://app.wercker.com/status/e4906f0a294addb9c15ef7fa008e16fe/s/master "wercker status")](https://app.wercker.com/project/bykey/e4906f0a294addb9c15ef7fa008e16fe)
 
