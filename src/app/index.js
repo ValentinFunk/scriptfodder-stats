@@ -29,9 +29,12 @@ var app = angular.module('stats', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngResou
 })
 
 .run(function($transitions, $state, ScriptFodder){
-  $transitions.onBefore({to: 'statistics.*'}, ['$state', '$transition$', function($transition$) {
+  $transitions.onBefore({to: 'statistics.*'}, ['$transition$', function($transition$) {
+    console.log($transition$);
     if (!ScriptFodder.loaded) {
-      console.log("Scriptfodder isn't loaded, redirecting to loading");
+      if ($transition$.from().name == "loading") {
+        return false;
+      }
       return $state.target('loading');
     }
   }]);

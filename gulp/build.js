@@ -41,7 +41,7 @@ module.exports = function(options) {
       .pipe($.inject(partialsInjectFile, partialsInjectOptions))
       .pipe($.useref())
       .pipe($.if('*.js', $.ngAnnotate()))
-      .pipe($.if('*.js', $.uglify({ preserveComments: $.uglifySaveLicense })).on('error', options.errorHandler('Uglify')))
+      .pipe($.if('*.js', $.uglify({ preserveComments: $.uglifySaveLicense, mangle: false })).on('error', options.errorHandler('Uglify')))
       .pipe($.if('*.css',$.replace('../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/', '../fonts/')))
       .pipe($.if('*.css', $.csso()))
       .pipe($.if('*.html', $.minifyHtml({
