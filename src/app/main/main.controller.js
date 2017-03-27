@@ -1,29 +1,34 @@
 'use strict';
 
-angular.module('stats')
+angular
+  .module('stats')
+  .controller(
+    'MainCtrl',
+    function($scope, $localStorage, $loading, ScriptFodder, $rootScope) {
+      $scope.$storage = $localStorage;
 
-.controller('MainCtrl', function($scope, $localStorage, $loading, ScriptFodder, $rootScope) {
-    $scope.$storage = $localStorage;
-
-    $scope.performCheck = function() {
+      $scope.performCheck = function() {
         $loading.start('checkApiKey');
         $scope.checkResult = {};
-        ScriptFodder.initialize()
-        .then(function() {
+        ScriptFodder.initialize().then(
+          function() {
             $loading.finish('checkApiKey');
             $scope.checkResult = {
-              status: 'success'  
+              status: 'success',
             };
-        }, function(err) {
+          },
+          function(err) {
             $loading.finish('checkApiKey');
             $scope.checkResult = {
-                status: 'error',
-                error: err
+              status: 'error',
+              error: err,
             };
-        });
-    };
-    
-    if ($scope.$storage.apiKey) {
+          }
+        );
+      };
+
+      if ($scope.$storage.apiKey) {
         $scope.performCheck();
+      }
     }
-});
+  );
