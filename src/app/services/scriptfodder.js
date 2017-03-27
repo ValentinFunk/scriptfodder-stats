@@ -90,6 +90,11 @@ angular
         .tap(function(scripts) {
           gotScriptsCallback(scripts);
         })
+        .then(function(scripts) {
+          return _.filter(scripts, function(script) {
+            return parseInt(script.status) != 2;
+          })
+        })
         .map(
           function(script) {
             statusCallback(script);
