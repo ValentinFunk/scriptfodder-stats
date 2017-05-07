@@ -46,7 +46,7 @@ angular
           },
           purchases: {
             method: 'GET',
-            url: 'https://scriptfodder.com/api/scripts/purchases/:scriptId?api_key=' +
+            url: 'https://gmodstore.com/api/scripts/purchases/:scriptId?api_key=' +
               $localStorage.apiKey,
             isArray: true,
             transformResponse: appendTransform(
